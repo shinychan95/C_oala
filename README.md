@@ -10,7 +10,7 @@ CSED232 OOP Team Project
 |엄태규|조원|Hidium|17학점+고기사랑|
 |이상윤|조원|High|14학점+애드립+중집위+연기사랑|
 |최서영|조원|High|21학점+한울림+오케스트라+음악사랑|
-|하경민|조원|High|19학점+POSCAT+알골즘사랑|
+|하경민|조원|High|19학점+POSCAT+알골즘사랑(?)|
 
 
 ## Meeting Date and Time
