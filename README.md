@@ -20,9 +20,11 @@ Weekly : Tuesday 12:15 ~ 13:15
 ```
 
 ## Notice
-- 월요일 점심(23일)까지
-   - 주제 관한 아이디어 업로드   
-   - 회의 진행, 프로젝트 방향, 개인적 추구사항 각 한 줄 이상 의견 같이 정리
+- 월요일 점심(23일)까지 각 한 줄 이상 의견 정리 및 업로드
+   - 주제 관한 아이디어   
+   - 회의 진행
+   - 프로젝트 방향
+   - 개인적 추구사항 
 
 ## Materials
 - [github 사용법](https://milooy.wordpress.com/2017/06/21/working-together-with-github-tutorial/)
