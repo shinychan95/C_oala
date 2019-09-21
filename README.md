@@ -19,15 +19,17 @@ CSED232 OOP Team Project
 Weekly : Tuesday 12:15 ~ 13:15
 ```
 
+## Notice
+- 월요일 점심(23일)까지
+   - 주제 관한 아이디어 업로드   
+   - 회의 진행, 프로젝트 방향, 개인적 추구사항 각 한 줄 이상 의견 같이 정리
+
+## Materials
+- [github 사용법](https://milooy.wordpress.com/2017/06/21/working-together-with-github-tutorial/)
+- [웹 개발, 프론트 백 풀스택 개발자](https://medium.com/code-states/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%A7%81%EA%B5%B0-%ED%8C%8C%ED%97%A4%EC%B9%98%EA%B8%B0-1-%ED%94%84%EB%A1%A0%ED%8A%B8-front-%EB%B0%B1-back-%ED%92%80%EC%8A%A4%ED%83%9D-full-stack-%EA%B0%9C%EB%B0%9C%EC%9E%90-f6c2f53e5b3b)
+- [게임 개발자](https://medium.com/code-states/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%A7%81%EA%B5%B0-%ED%8C%8C%ED%97%A4%EC%B9%98%EA%B8%B0-2-%EA%B2%8C%EC%9E%84-%EA%B0%9C%EB%B0%9C%EC%9E%90-9d1898d12f3f)
+- [블록체인 개발자](https://medium.com/code-states/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%A7%81%EA%B5%B0-%ED%8C%8C%ED%97%A4%EC%B9%98%EA%B8%B0-3-%EB%B8%94%EB%A1%9D%EC%B2%B4%EC%9D%B8-%EA%B0%9C%EB%B0%9C%EC%9E%90-9d7b2840ff6f)
+
+
 ## Objectives
 * Fun
- 
-## Notice
-- 다음 주 화요일(24일)까지
-   - 주제에 대한 간단한 의견 보내주기
-   - 회의 진행 및 프로젝트에 대한 전반적 의견 보내주기
-   - Github 계정 생성 및 파일 업로드
-
-- 개인적으로 공부할 것
-   - github 사용법
-   - 전체적인 서비스 개발을 위한 기초
