@@ -35,7 +35,8 @@
           
           
 2. **Session / Cookie 방식**
-![SessCook](/docs/images/Session%20and%20Cookie.png)
+     <br>
+    ![SessCook](/docs/images/Session%20and%20Cookie.png)
     - **장점**
         - 쿠키가 담긴 HTTP 요청이 도중에 노출되더라도 쿠키 자체(세션 ID)는 유의미한 값을 갖고있지 않음.
         - 사용자는 고유의 ID값을 발급받게 됩니다. ~~더 효율적인 Index~~ 그렇게 되면 서버에서는 쿠키 값을 받았을 때 일일이 회원정보를 확인할 필요 없이 바로 어떤 회원인지를 확인할 수 있어 서버의 자원에 접근하기 용이함.
@@ -46,11 +47,11 @@
           
           
 3. **토큰 기반 인증 방식 (ft. JWT)**
-![jwt](/docs/images/jwt.png)  
+     
+    ![jwt](/docs/images/jwt.png)<br>
     - 토큰을 만들기 위해서는 크게 3가지, **Header**, **Payload**, **Verify Signature**가 필요.
-    - 최종적인 결과 : Encoded Header + "." + Encoded Payload + "." + Verify Signature  
-      
-![jwt2](/docs/images/jwt2.png)
+    - 최종적인 결과 : Encoded Header + "." + Encoded Payload + "." + Verify Signature<br>
+    ![jwt2](/docs/images/jwt2.png)<br>
     - **장점**
         - 간편합니다. 세션/쿠키는 별도의 저장소의 관리가 필요합니다. 그러나 JWT는 발급한 후 검증만 하면 되기 때문에 추가 저장소가 필요 없습니다.
         - 확장성이 뛰어납니다. 토큰 기반으로 하는 다른 인증 시스템에 접근이 가능합니다. 예를 들어 Facebook 로그인, Google 로그인 등은 모두 토큰을 기반으로 인증을 합니다.
