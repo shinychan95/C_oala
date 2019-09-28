@@ -1,5 +1,6 @@
 # Research : Algorithm
 키워드 추출 및 추천 알고리즘 - NLP와 관련
+
 데이터베이스에서의 데이터 추출 및 처리 프로세스 - SQL
 ## 1. 키워드 추출 및 추천 알고리즘
 ### CF(Collaborative Filtering)
