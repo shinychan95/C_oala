@@ -31,6 +31,6 @@
         - 서버에서는 신호가 올때마다 Id,Pw를 통해 유저가 맞는지 인증해야 한다. 이는 비효율적이다.
         
 2. **Session / Cookie 방식**
-![SessCook](../images/Session and Cookie.png)
+- ![SessCook](/docs/images/Session and Cookie.png)
     - 
 3. 토큰 기반 인증 방식 (ft. JWT)
