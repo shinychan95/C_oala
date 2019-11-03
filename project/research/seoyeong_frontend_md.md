@@ -7,7 +7,8 @@
 ggplot2 함수는 기본적으로 레이어를 추가하는 방식으로 그래프를 그림. 레이어를 추가해 가면서 그래프를 꾸미고 정보를 더해 나감. 그래프를 제거하거나 변형시키는 것도 레이어추가를 통해 할 수 있음.
 
 대시보드 코드 : http://rpubs.com/simonvc/504532
- ! [텍스트 대시보드 예시](C:\Users\Seoyeong_Choy\Desktop.jpg "텍스트 대시보드")
+ ! [텍스트 대시보드 예시](http://hironlee.cdn2.cafe24.com/images/dbguide_01_twitteR_sample.png "텍스트 대시보드")
+
 위 그림의 오픈 소스 : http://hochul.net/blog/twitterrwordcloud/
 
 ## Angular JS 
@@ -32,6 +33,7 @@ D3.js는 데이터 시각화를 위한 자바스크립트 라이브러리로, HT
 ## 구글 데이터 스튜디오
 매우 간단함.
 ![데이터셋 예시](http://mindthelog.com/wp-content/uploads/2016/12/Screen-Shot-2016-12-19-at-12.40.34-AM.png "구글 데이터셋 예시")
+
 추천하는 방법 :
 1.	모든 데이터를 google sheets로 1차 가공 및 통합 후 구글 데이터 스튜디오의 데이터 소스에 연결함.(물론, 다양한 데이터셋을 연결할 수 있다.  
 2.	데이터 소스 연결 후, 필드를 연결
