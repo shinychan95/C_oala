@@ -7,7 +7,7 @@
 ggplot2 함수는 기본적으로 레이어를 추가하는 방식으로 그래프를 그림. 레이어를 추가해 가면서 그래프를 꾸미고 정보를 더해 나감. 그래프를 제거하거나 변형시키는 것도 레이어추가를 통해 할 수 있음.
 
 대시보드 코드 : http://rpubs.com/simonvc/504532
- ! [텍스트 대시보드 예시](https://images.app.goo.gl/GVcMHwdpxTPR9EDt9 "텍스트 대시보드")
+ ! [텍스트 대시보드 예시](C:\Users\Seoyeong_Choy\Desktop.jpg "텍스트 대시보드")
 위 그림의 오픈 소스 : http://hochul.net/blog/twitterrwordcloud/
 
 ## Angular JS 
