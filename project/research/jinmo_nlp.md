@@ -1,6 +1,6 @@
 # 참고 링크
-https://statkclee.github.io/nlp2/regex-import-text.html
-https://wikidocs.net/33520
+https://statkclee.github.io/nlp2/regex-import-text.html..
+https://wikidocs.net/33520..
 https://ratsgo.github.io/from%20frequency%20to%20semantics/2017/03/11/embedding/
 
 # PDF to Text 변환
