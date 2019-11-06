@@ -1,5 +1,5 @@
 # C_oala
-CSED232 OOP Team Project
+CSED232 OOP Team Project<br>
 텍스트마이닝을 활용한 대시보드 개발
 
 ## Team Member
