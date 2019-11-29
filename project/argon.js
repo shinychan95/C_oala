@@ -20,6 +20,19 @@
 // Bootstrap Datepicker
 //
 
+const mysql = require('mysql')
+var conn = mysql.createConnection({
+	host:"52.79.166.26",
+	port : 3306,
+	user : "root",
+	password : "root",
+	database : "postech"
+})
+conn.connect()
+
+
+
+
 'use strict';
 
 var Datepicker = (function() {
