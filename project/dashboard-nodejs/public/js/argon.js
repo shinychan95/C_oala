@@ -19,6 +19,41 @@
 //
 // Bootstrap Datepicker
 //
+var mysql = require('mysql');
+var routes = require('./routes/index');
+var conn  = mysql.createConnection({
+  host            : '52.79.166.26',
+  port            : 3306,
+  user            : 'csed232',
+  password        : 'csed232',
+  database        : 'postech'
+});
+
+var express = require('express');
+var ejs = require('ejs');
+var bodyParser = require('body-parser');
+var app = express();
+app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({extended: false}));  // urlencoded    
+app.use(bodyParser.json());                         // json 타입으로 파싱하게 설정
+app.use(express.static(__dirname + '/'));
+console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+var testchart =  {
+	list : function(req, res)
+	{
+	   var sql = "SELECT year FROM postech.nonmoon limit 5";
+ 
+	   conn.query(sql, function(err, results, field) {
+		  
+		  res.render('./../views/partials/header', {data : 'fucck', year : results})
+	   });
+	}
+	
+ };
+
+///////////////////////////////////////
+
+
 
 'use strict';
 
@@ -962,10 +997,10 @@ var OrdersChart = (function() {
 				}
 			},
 			data: {
-				labels: ['model', 'algorithm', 'learning', 'method', 'problem', 'data', 'Nov', 'approach'],
+				labels: ['model', 'algorithm', 'learning', 'method', 'problem', 'data'],
 				datasets: [{
 					label: 'Sales',
-					data: [25, 20, 30, 22, 17, 29]
+					data: [25, 20, 30, 22]
 				}]
 			}
 		});

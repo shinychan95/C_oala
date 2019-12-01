@@ -246,7 +246,7 @@ The documentation for the Argon Dashboard Node is hosted at our [website](https:
 ├── public
 │   ├── css
 │   │   ├── argon.css
-│   │   └── argon.min.css
+│   │   └── .css
 │   ├── fonts
 │   │   └── nucleo
 │   ├── img
@@ -255,7 +255,7 @@ The documentation for the Argon Dashboard Node is hosted at our [website](https:
 │   │   └── theme
 │   ├── js
 │   │   ├── argon.js
-│   │   └── argon.min.js
+│   │   └── argon.js
 │   ├── scss
 │   │   ├── argon.scss
 │   │   ├── bootstrap
