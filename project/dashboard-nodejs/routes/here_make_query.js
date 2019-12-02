@@ -28,16 +28,25 @@ exports.qq = conn.query(sql, function(err, results){
     rows.sort(function(a, b){
         return a.year < b.year ? -1 : a.year > b.year ? 1 : 0;
     })
-    yoman.min = rows[0];
-    yoman.gap = rows[-1] - rows[0];
-    yoman.list = new Array();
-    for(var i = 1; i < yoman.gap; i++){yoman.list[i] = 0;}
-    yoman.list[0] = yoman.list[0] + 1;
+    var min = rows[0].year;
+    var gap = rows[results.length-1].year - rows[0].year;
+    var lis = new Array();
+    for(var i = 0; i < gap; i++){lis[i] = 0;}
+    lis[0] = lis[0] + 1;
     for(var i = 1; i < results.length; i++)
     {
-        if(rows[i] > rows[i-1]){x++;}
-        yoman.list[x] = yoman.list[x] + 1;
+        if(rows[i].year != rows[i-1].year){x++;}
+        lis[x] = lis[x] + 1;
     }
+    for(var i = 0; i < gap; i++)
+    {
+        console.log(lis[i]);
+    }
+    console.log(gap);
+
+    yoman.gap = gap;
+    yoman.min = min;
+    yoman.lis = lis;
 
     return yoman;
 })
