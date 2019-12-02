@@ -1,3 +1,6 @@
+var mooerhalga = require('./here_make_query');
+var mooerhalga2 = mooerhalga.qq;
+
 const express = require('express');
 
 const router = express.Router();
@@ -18,7 +21,7 @@ var pool  = mysql.createPool({
 var sql = "SELECT * FROM postech.nonmoon limit 5";
 pool.query(sql, function(err, results){
 router.get('/', (req, res) => {
-  res.render('pages/dashboard', {data : results});
+  res.render('pages/dashboard', {data : results, yoman : mooerhalga2});
   })
 });
 
