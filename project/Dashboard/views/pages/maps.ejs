@@ -1,0 +1,141 @@
+<body>
+  <!-- Sidenav -->
+  <% include ../partials/sidebar %>
+  <!-- Main content -->
+  <div class="main-content">
+    <!-- Top navbar -->
+    <% include ../partials/navbar %>
+    <!-- Header -->
+    <%- include('../partials/header', {data: data}); %>
+  <!-- Page content -->
+
+<% var tmp = []; %>
+<% for (var i = 0; i < 50; i++) {%>
+<% tmp[i] = WCdata[i] %>
+<%}%>
+<% console.log(WCdata[50])%>
+
+<% var tmp2 = []; %>
+<% for (var i = 50; i < 100; i++) {%>
+<% tmp2[i - 50] = WCdata[i] %>
+<%}%>
+
+
+               <!-- 여기부터 바꿈(하경민) -->
+  <div class="container-fluid mt-5">
+      <div class="row"> <!--display: flex 속성 가짐-->
+        <div class="col-xl-12 mb-5 mb-xl-0">
+          <div class="card shadow border-0">
+            <h1 style="text-align:center">WordCloud by Doctor's thetis</h1>
+            <script type="text/javascript" src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>       <!-- 엔진 1 -->
+            <script type="text/javascript" src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>  <!-- 엔진 2 -->
+            <div id="container" style="height: 800px"><!-- wordcloud 크기 조절, 타입은 container-->
+              
+                <script type="text/javascript">
+                    anychart.onDocumentReady(function() {
+                      var data = <%- JSON.stringify(tmp) %>
+                      //WCdata를 wordcloud에서 인식하도록 문자열로 바꿈.
+
+                      //데이터 입력
+                      var chart = anychart.tagCloud (data);
+
+                      //차트 제목(작아보여서 키울 방법 찾아야할듯)
+                      chart.title('WordCloud for All Department')
+
+                      chart.fromAngle(-80); //이 각도부터
+                      chart.toAngle(80);    //이 각도까지를
+                      chart.anglesCount(15);//이만큼의 구간으로 나눠서 그 각도로 단어를 기울임.
+                      // chart.angles([0, -45, 90, 45, -90])//나올 수 있는 각도 조절
+
+                      //단어마다 링크 걸어주기.(일단 네이버 사전으로 가게)
+                      chart.listen("pointClick", function(e){
+                        var url = "https://dict.naver.com/search.nhn?dicQuery=" + e.point.get("x") + "&query=" + e.point.get("x") + "&target=dic&ie=utf8&query_utf=&isOnlyViewEE=";
+                        window.open(url, "_blank");
+                      });
+
+                      //단어별 value값에 따라 앞 색상부터 뒤 색상까지 그라데이션
+                      var customColorScale = anychart.scales.linearColor();
+                      customColorScale.colors(["#31fd6d", "#097cc6"]);
+                      chart.colorScale(customColorScale);
+                      chart.colorRange().enabled(true);
+                      
+                      // chart.normal().fill("#f89B00");//원래 색(귤색)
+                      chart.hovered().fill("#93bfec");//커서를 위에 올리면 이 색
+                      chart.selected().fill("#1f66ad");//클릭 후에는 이 색
+                      // chart.normal().fontWeight(600);//글자 두께
+
+                      chart.mode("spiral");//차트 모양은 rect와 spiral 2가지이다.
+
+                      // hart.legend(true);//얘는 학과를 위쪽에 네모로 띄움
+                      // chart.colorRange(true);//얘는 아래쪽 색막대를 띄움
+                      // chart.colorRange().length('80%');//밑에 있는 색깔 막대 길이
+
+                      // display the word cloud chart
+                      chart.container("container");
+                      chart.draw();//실행
+                    });
+                </script>
+                
+                <script type="text/javascript">
+                  anychart.onDocumentReady(function() {
+                    var data = <%- JSON.stringify(tmp2) %>
+                    //WCdata를 wordcloud에서 인식하도록 문자열로 바꿈.
+
+                    //데이터 입력
+                    var chart = anychart.tagCloud (data);
+
+                    //차트 제목(작아보여서 키울 방법 찾아야할듯)
+                    chart.title('WordCloud for All Department')
+
+                    chart.fromAngle(-80); //이 각도부터
+                    chart.toAngle(80);    //이 각도까지를
+                    chart.anglesCount(15);//이만큼의 구간으로 나눠서 그 각도로 단어를 기울임.
+                    // chart.angles([0, -45, 90, 45, -90])//나올 수 있는 각도 조절
+
+                    //단어마다 링크 걸어주기.(일단 네이버 사전으로 가게)
+                    chart.listen("pointClick", function(e){
+                      var url = "https://dict.naver.com/search.nhn?dicQuery=" + e.point.get("x") + "&query=" + e.point.get("x") + "&target=dic&ie=utf8&query_utf=&isOnlyViewEE=";
+                      window.open(url, "_blank");
+                    });
+
+                    //단어별 value값에 따라 앞 색상부터 뒤 색상까지 그라데이션
+                    var customColorScale = anychart.scales.linearColor();
+                    customColorScale.colors(["#31fd6d", "#097cc6"]);
+                    chart.colorScale(customColorScale);
+                    chart.colorRange().enabled(true);
+                    
+                    // chart.normal().fill("#f89B00");//원래 색(귤색)
+                    chart.hovered().fill("#93bfec");//커서를 위에 올리면 이 색
+                    chart.selected().fill("#1f66ad");//클릭 후에는 이 색
+                    // chart.normal().fontWeight(600);//글자 두께
+
+                    chart.mode("spiral");//차트 모양은 rect와 spiral 2가지이다.
+
+                    // hart.legend(true);//얘는 학과를 위쪽에 네모로 띄움
+                    // chart.colorRange(true);//얘는 아래쪽 색막대를 띄움
+                    // chart.colorRange().length('80%');//밑에 있는 색깔 막대 길이
+
+                    // display the word cloud chart
+                    chart.container("container");
+                    chart.draw();//실행
+                  });
+              </script>
+            </div>
+
+
+           
+        </div>
+      </div>
+    </div>
+    
+  </div>
+<!-- Footer -->
+
+</div>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBd3PjUqq81lIOfBPYXrQGWwK5T4ystZjA"></script>
+
+<!-- Include scripts -->
+<% include ../partials/scripts %>
+</body>

@@ -1,0 +1,26 @@
+  {
+    "development": {
+        "username": "csed232",
+        "password": "csed232",
+        "database": "postech",
+        "host": "52.79.166.26",
+        "port": 3306,
+        "dialect": "mysql"
+    },
+    "test": {
+        "username": "csed232",
+        "password": "csed232",
+        "database": "postech",
+        "host": "52.79.166.26",
+        "port": 3306,
+        "dialect": "mysql"
+    },
+    "production": {
+        "username": "csed232",
+        "password": "csed232",
+        "database": "postech",
+        "host": "52.79.166.26",
+        "port": 3306,
+        "dialect": "mysql"
+    }
+}

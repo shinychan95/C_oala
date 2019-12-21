@@ -1,0 +1,237 @@
+<head>
+  <meta charset="utf-8">
+  <script src = https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js></script>
+</head>
+
+<body>
+    <!-- Sidenav -->
+    <% include ../partials/sidebar %>
+    <!-- Main content -->
+    <div class="main-content">
+      <!-- Top navbar -->
+      <% include ../partials/navbar %>
+      <!-- 서영 그래프 바꿈 -->
+      <!-- Header -->
+      <%- include('../partials/header', {data: data}); %>
+      <!-- Page content -->
+      <div class="container-fluid mt-5">
+        <div class="row"> <!--display: flex 속성 가짐-->
+          <div class="col-xl-12 mb-5 mb-xl-0">
+            <div class="card bg-gradient-default shadow">
+              <div class="card-header bg-transparent">
+                <div class="row align-items-center">
+                  <div class="col">
+                    <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
+                    <h2 class="text-white mb-0">Number of dissertations</h2>
+                  </div>
+                <div class="col">
+                  <ul class="nav nav-pills justify-content-end">
+                    <li class="nav-item mr-2 mr-md-0">
+                      <div id = "sendAjax_totalyear" class="nav-link py-2 px-3 active" data-toggle="tab">
+                        <span class="d-none d-md-block">Total</span>
+                        <span class="d-md-none">T</span>
+                      </div>
+                    </li>
+                    <li class="nav-item mr-2 mr-md-0">
+                      <div id = "sendAjax_doctoryear"  data-toggle="chart" class="nav-link py-2 px-3 active" data-toggle="tab">
+                        <span class="d-none d-md-block">Doctor</span>
+                        <span class="d-md-none">D</span>
+                       </div>
+                    </li>
+                    <li class="nav-item mr-2 mr-md-0">
+                        <div id = "sendAjax_masteryear" class="nav-link py-2 px-3 active" data-toggle="tab">
+                        <span class="d-none d-md-block">Master</span>
+                        <span class="d-md-none">M</span>
+                      </a>
+                    </li>  
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Chart -->
+              <div class="chart">
+                <!-- Chart wrapper -->
+                <canvas id="chart-sales" class = "chart-canvas" ></canvas>                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- 서영 그래프 수정 끝 -->
+
+<!-- 서영 밑의 recent 논문 수정 -->
+        <div class="row mt-5">
+          <div class="col-xl-6 mb-5 mb-xl-0">
+            <div class="card shadow">
+              <div class="card-header border-0">
+                <div class="row align-items-center">
+                  <div class="col">
+                    <h3 class="mb-0">Recent Thesis for Master's</h3>
+                  </div>
+                  <div class="col text-right">
+                  </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <!-- Projects table -->
+                <table class="table align-items-center table-flush">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">Year</th>
+                      <th scope="col">Title</th>
+                      <th scope="col">author</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">
+                          <%= master[0].year %>
+                      </th>
+                      <td>
+                          <a href="http://postech.dcollection.net/srch/srchResultList?searchWhere1=all&searchKeyWord1=<%=master[0].title%>&btnG=" ><%= master[0].title %></a>
+                      </td>
+                      <td>
+                          <%= master[0].author %>
+                      </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <%= master[1].year %>
+                        </th>
+                        <td>
+                            <a href="http://postech.dcollection.net/srch/srchResultList?searchWhere1=all&searchKeyWord1=<%=master[1].title%>&btnG=" ><%= master[1].title %></a>
+                        </td>
+                        <td>
+                            <%= master[1].author %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <%= master[2].year %>
+                        </th>
+                        <td>
+                            <a href="http://postech.dcollection.net/srch/srchResultList?searchWhere1=all&searchKeyWord1=<%=master[2].title%>&btnG=" ><%= master[2].title %></a>
+                        </td>
+                        <td>
+                            <%= master[2].author %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <%= master[3].year %>
+                        </th>
+                        <td>
+                            <a href="http://postech.dcollection.net/srch/srchResultList?searchWhere1=all&searchKeyWord1=<%=master[3].title%>&btnG=" ><%= master[3].title %></a>
+                        </td>
+                        <td>
+                            <%= master[3].author %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <%= master[4].year %>
+                        </th>
+                        <td>
+                            <a href="http://postech.dcollection.net/srch/srchResultList?searchWhere1=all&searchKeyWord1=<%=master[4].title%>&btnG=" ><%= master[4].title %></a>
+                        </td>
+                        <td>
+                            <%= master[4].author %>
+                        </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-6">
+            <div class="card shadow">
+              <div class="card-header border-0">
+                <div class="row align-items-center">
+                  <div class="col">
+                    <h3 class="mb-0">Recent Thesis for Doctor's</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <!-- Projects table -->
+                <table class="table align-items-center table-flush">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">Year</th>
+                      <th scope="col">Title</th>
+                      <th scope="col">author</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                        <th scope="row">
+                            <%= doctor[0].year %>
+                        </th>
+                        <td>
+                            <a href="http://postech.dcollection.net/srch/srchResultList?searchWhere1=all&searchKeyWord1=<%= doctor[0].title %>&btnG=" ><%= doctor[0].title %></a>
+                        </td>
+                        <td>
+                            <%= doctor[0].author %>
+                        </td>
+                      </tr>
+                      <tr>
+                          <th scope="row">
+                              <%= doctor[1].year %>
+                          </th>
+                          <td>
+                              <a href="http://postech.dcollection.net/srch/srchResultList?searchWhere1=all&searchKeyWord1=<%= doctor[1].title %>&btnG=" ><%= doctor[1].title %></a>
+                          </td>
+                          <td>
+                              <%= doctor[1].author %>
+                          </td>
+                      </tr>
+                      <tr>
+                          <th scope="row">
+                              <%= doctor[2].year %>
+                          </th>
+                          <td>
+                              <a href="http://postech.dcollection.net/srch/srchResultList?searchWhere1=all&searchKeyWord1=<%= doctor[2].title %>&btnG=" ><%= doctor[2].title %></a>
+                          </td>
+                          <td>
+                              <%= doctor[2].author %>
+                          </td>
+                      </tr>
+                      <tr>
+                          <th scope="row">
+                              <%= doctor[3].year %>
+                          </th>
+                          <td>
+                              <a href="http://postech.dcollection.net/srch/srchResultList?searchWhere1=all&searchKeyWord1=<%= doctor[3].title %>&btnG=" ><%= doctor[3].title %></a>
+                          </td>
+                          <td>
+                              <%= doctor[3].author %>
+                          </td>
+                      </tr>
+                      <tr>
+                          <th scope="row">
+                              <%= doctor[4].year %>
+                          </th>
+                          <td>
+                              <a href="http://postech.dcollection.net/srch/srchResultList?searchWhere1=all&searchKeyWord1=<%= doctor[4].title %>&btnG=" ><%= doctor[4].title %></a>
+                          </td>
+                          <td>
+                              <%= doctor[4].author %>
+                          </td>
+                      </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+<!-- 서영 밑의 recent 논문 수정 끝 -->
+
+        <!-- Footer -->
+        <% include ../partials/footer %>
+      </div>
+    </div>
+    <!-- Include scripts -->
+    <% include ../partials/scripts %>
+  </body>
+  

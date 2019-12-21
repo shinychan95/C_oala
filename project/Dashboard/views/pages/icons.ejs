@@ -1,0 +1,331 @@
+<body>
+  <!-- Sidenav -->
+  <%- include ../partials/sidebar %>
+  <!-- Main content --> 
+  <div class="main-content">
+    <!-- Top navbar -->
+    <% include ../partials/navbar %>
+    <!-- Header -->
+    <%- include('../partials/header', {data: data}); %>
+    <!-- Page content -->
+
+    <%  var temp = []; %>
+    <%  for(var i = 0; i < results.length; i++) { %>
+    <%  var row = JSON.stringify(results[i]['crf_keyword']);   %>
+    <%  row = row.replace(/'/gi, "")   %>
+    <%  row = row.replace("[", "")   %>
+    <%  row = row.replace("]", "")   %>
+    <%  row = row.replace(/"/gi, "")   %>
+    <%  temp[i] = row.split(',');     %>
+    <% } %>
+
+    <div class="container-fluid" style = "margin-top: 5rem !important;">
+      <!-- Table -->
+      <div class="row">
+        <div class="col">
+          <div class="card shadow">
+            <div class="card-header bg-transparent">
+              <a class="mb-0"><font size=5 color="gray">RAKE</font> : First Keywords from each paper</a>
+              <div class="col text-right">
+                  <!-- 서영 고침 알고리즘에 대한 설명 modal-->
+                  <button type='button' class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myExplain_modal1" data-clipboard-text="active-40">Explain</button>
+                  <div id="myExplain_modal1" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                      <div class="modal-content" style="width: 850px">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                          <h4 style="color:gray ; text-align:center; font-weight:bold" >RAKE 알고리즘 간단 정리</h4>
+                          <div style="text-align:center" >
+                              ※불용어: in, at, the와 같이 큰 의미를 가지고 있지 않은 단어
+                                1.   Text에 대해 단어 단위로 분리하고, 불용어에 해당하는 단어를 제거한다. 각 단어마다 다른 단어와 같이 출현한 횟수가 기록된 표가 생성된다.<br>
+                                2.   각 단어마다 degree와 frequency를 구한다.(Frequency는 단어가 출현한 횟수를 의미하고, Degree는 다른 단어와 얼마나 같이 출현 했는지를 의미한다.
+                                이 값들은 표를 통해, 쉽게 계산할 수 있다.)<br>
+                                3.   Degree와 frequency를 기반으로, 각 단어마다 score를 매긴다. Score&#61;degree&#47;frequency<br>
+                                4.   구성하는 단어들의 score총합으로 phrase score가 매겨진다. Score가 높은 순서대로 phrase가 keyword list에 저장된다.<br><br>
+                             </div>
+                              <h4 style="color:gray; text-align:center; font-weight:bold">RAKE 알고리즘이 해당 결과를 내는 이유</h4>
+                              <div style="text-align:center">
+                              1.   단어의 score는 degree&#47;frequency로 계산되는데, 이는 동시 발생이 많은 단어에 대해 높은 score를 부여한다는 의미이다. 이와 같이 계산하는 이유는 RAKE알고리즘이 핵심 단어가 아닌, 핵심 phrase를 추출하도록 설계되었기 때문이다.<br>
+                              2.   해당 코드는 전처리 구간에서, 불용어를 제거하고 특정 기호를 사용해 그 위치를 표시한다. 그리고 표시된 것을 기준으로 나누어 분석하도록 구성되어 있다. <br>
+                              1,2 사실을 종합하여 고려하면,
+                              Text(논문)을 문장과 불용어를 기준으로 나누고, 나누어진 구간 내에서 길게 붙어있던 단어 뭉치들이 key phrase로 인식되어 출력됨을 알 수 있다
+                            </div>
+                            </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <!-- 서영 설명 modal 수정 끝 -->
+            </div>
+            <div class="card-body">
+              <div class="row icon-examples">
+
+                <!-- 여기부터 바꿈(하경민) -->
+                 <!-- 1. RAKE. 1st 키워드를 버튼에 띄우고 나머지는 modal 창에 띄우기.-->
+                <%for (var i = 0; i < results.length; i++) { %>
+                  <div class="col-lg-3 col-md-6">
+                    <button type="button" class="btn-icon-clipboard" data-toggle="modal" data-target="#myModal_RAKE<%=i%>" data-clipboard-text="active-40" title="Click to see the Title of the Paper">
+                      <div>
+                        <i class="ni ni-active-40"></i>
+                        <span><%= results[i]['1st_keyword'] %></span>
+                      </div>
+                    </button>
+                  </div>
+                  
+                   <!-- 버튼을 클릭하면 modal 창을 띄워서, 논문 제목과 그 논문을 구글 학술검색에 검색해주는 링크 띄우기 -->
+                  <div id="myModal_RAKE<%=i%>" class="modal fade" role="dialog" >
+                    <div class="modal-dialog" >
+                      <div class="modal-content" style="width: 850px">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <h4 style="color:gray">2nd Keyword</h4><p>   <%= results[i]['2nd_keyword'] %></p>
+                            <h4 style="color:gray">3rd Keyword</h4><p>   <%= results[i]['3rd_keyword'] %></p>
+                          <h4 style="color:gray">Keyword from</h4>
+                          <p><a href= "https://scholar.google.co.kr/scholar?hl=ko&as_sdt=0%2C5&q=<%=results[i]['title']%>&btnG=" ><%= results[i]['title'] %></a></p>
+                          
+                          <h4 style="color:gray">abstract</h4>
+                          <%= results[i].abstract %>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% } %>
+                 <!-- 여기까지 바꿈(하경민) -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid" style = "margin-top: 5rem !important;">
+        <!-- Table -->
+        <div class="row">
+          <div class="col">
+            <div class="card shadow">
+              <div class="card-header bg-transparent">
+                  <a class="mb-0"><font size=5 color="gray">TF-IDF</font></font> : First Keywords from each paper</a>
+                  <div class="col text-right">
+                      <!-- 서영 고침 알고리즘에 대한 설명 modal-->
+                      <button type='button' class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myExplain_modal2" data-clipboard-text="active-40">Explain</button>
+                      <div id="myExplain_modal2" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                          <div class="modal-content" style="width: 850px">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                              <h4 style="color:gray ; text-align:center; font-weight:bold" >TF-IDF 알고리즘 간단 정리</h4>
+                              <div style="text-align:center" >
+                                TF-IDF(Term Frequency - Inverse Document Frequency)는 문서들의 집합 내에서,
+                                 어떤 단어가 특정 문서 내에서 얼마나 중요한 것인지를 나타내는 통계적 수치이다.
+                                 즉, 어떤 문서에서 핵심어를 추출하는 통계적 방법 중 하나이다. <br>
+                                TF(Term Frequency, 단어 빈도)는 특정한 단어가 한 문서 내에 얼마나 자주 등장하는지를 나타낸다.
+                                 DF(Document Frequency, 문서 빈도)는 단어가 한 문서가 아닌 전체 문서들 중에서 얼마나 많이 나오는지를 수학적으로 표현한 값이다. IDF(Inverse Document Frequency)는 DF의 역수 형태이다.<br>
+                                TF가 높으면 문서 내에서 그 단어가 많이 나온다는 뜻이므로 그 단어가 중요한 단어라고 생각할 수는 있지만,
+                                 이 단어가 만약 많은 문서에서 TF가 높은 단어라면 그 문서의 키워드가 아닌 전체 문서에서 모두 중요하게 생각되는 단어라고도 생각할 수 있다.
+                                  따라서 이를 해결하기 위해 IDF라는 값을 도입한다. 모든 문서에서 TF가 높다면, 즉 모든 문서에서 흔히 나타나는 단어라면 DF 역시 높을 것이다.
+                                  따라서 어떤 단어가 유용한 단어인지 판별하기 위해서는 TF/DF의 값을 보면 될 것이다. <br>
+                                TF-IDF에서는 각 문서들에 대해 모든 단어에서 TF-IDF를 계산하여 단어마다 가중치를 매긴다. 
+                                TF-IDF값이 높으면 높을수록 그 단어는 문서 내에서 중요한 단어일 것이다.
+                              </div>
+                              <h4 style="color:gray ; text-align:center; font-weight:bold" >TF-IDF 가중치 사용법</h4>
+                              <div style="text-align:center">
+                                1.	TF-IDF의 효과를 높이기 위해 대상이 되는 문서들을 전처리를 진행한다. 
+                                전처리에서는 문서 내에 영어가 아닌 문자들이 있을 경우 제거하고, 대문자와 소문자를 구분하지 않도록 모두 소문자로 바꾼다. 
+                                또한, lemmatize 작업을 통해 복수형을 모두 단수형으로 바꾸고 	불용어들도 모두 제거한 후, 품사가 명사인 단어들만 남긴다.<br>
+                                2.	실제 TF-IDF의 적용 과정에서는 단순한 TF-IDF의 기본 식이 아닌 가장 적절한 TF-IDF의 weighting scheme을 찾는 작업을 진행하였다.
+                                 이를 통해 weighting scheme을 확정한 후, 논문들의 초록들로 이루어진 코퍼스를 Keras의 Tokenizer라는 객체를 통해 TF-IDF 값들로 이루어진 matrix로 변환한다. <br>
+                                3.	최종적으로는 각 문서들에 대해 상위 5개의 키워드를 추출한 후, 이를 SQL을 통해 DB에 저장하였다.<br>
+                                
+                              </div>
+                                  <h4 style="color:gray; text-align:center; font-weight:bold">TF-IDF 키워드 특징</h4>
+                                  <div style="text-align:center">
+                                    TF-IDF를 통해 추출된 키워드는 분석 대상이 되는 문서에서만 많이 등장하는 단어들이 나온다. 따라서 논문에서 집중하는 특정 연구 주제나 방법에 관련된 단어들이 주로 나온다. <br>
+                                    문서의 키워드는 특정 문서 내에서는 많이 등장하지만 모든 문서에서 흔하게 나타나지 않는 단어가 되어야 하기 때문에 TF-IDF는 키워드를 찾는 유용한 통계적 가중치가 될 수 있다. <br>
+                                    
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <!-- 서영 설명 modal 수정 끝 -->
+                </div>
+              <div class="card-body">
+                <div class="row icon-examples">
+  
+                   <!-- 2. TF_IDF. tf_key1 띄우고 나머지는 modal에 띄우기 -->
+                  <%for (var i = 0; i < results.length; i++) { %>
+                    <div class="col-lg-3 col-md-6">
+                      <button type="button" class="btn-icon-clipboard" data-toggle="modal" data-target="#myModal_tfidf<%=i%>" data-clipboard-text="active-40" title="Click to see the Title of the Paper">
+                        <div>
+                          <i class="ni ni-active-40"></i>
+                          <span><%= results[i]['tf_key1'] %></span>
+                        </div>
+                      </button>
+                    </div>
+                     <!-- 버튼을 클릭하면 modal 창을 띄워서, 논문 제목과 그 논문을 구글 학술검색에 검색해주는 링크 띄우기 -->
+                     <div id="myModal_tfidf<%=i%>" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                          <div class="modal-content" style="width: 850px">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <h4 style="color:gray">2nd Keyword</h4><p>   <%= results[i]['tf_key2'] %></p>
+                                <h4 style="color:gray">3rd Keyword</h4><p>   <%= results[i]['tf_key3'] %></p>
+                                <h4 style="color:gray">4th Keyword</h4><p>   <%= results[i]['tf_key4'] %></p>
+                                <h4 style="color:gray">5th Keyword</h4><p>   <%= results[i]['tf_key5'] %></p>
+                              <h4 style="color:gray">Keyword from</h4>
+                              <p><a href= "https://scholar.google.co.kr/scholar?hl=ko&as_sdt=0%2C5&q=<%=results[i]['title']%>&btnG=" ><%= results[i]['title'] %></a></p>
+    
+                              <h4>abstract</h4>
+                              <%= results[i].abstract %>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  <% } %>
+                   <!-- 여기까지 바꿈(하경민) -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+      <div class="container-fluid" style = "margin-top: 5rem !important;">
+          <!-- Table -->
+          <div class="row">
+            <div class="col">
+              <div class="card shadow">
+                <div class="card-header bg-transparent">
+                  <a class="mb-0"><font size=5 color="gray">CRF</font></font> : First Keywords from each paper</a>
+                  <div class="col text-right">
+                      <!-- 서영 고침 알고리즘에 대한 설명 modal-->
+                      <button type='button' class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myExplain_modal3" data-clipboard-text="active-40">Explain</button>
+                      <div id="myExplain_modal3" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                          <div class="modal-content" style="width: 850px">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                              <h4 style="color:gray ; text-align:center" >CRF 알고리즘 간단 정리</h4>
+                              <div style="text-align:center" >
+                                CRF는 sequence labeling의 한 종류이다. Sequence labeling이란 순차적으로 연결되어 있는 입력 데이터의 구성 요소 각각에 대한 레이블을 labeling 해주는 것을 말한다.
+                                CRF의 가장 큰 차별점은 주어진 input sequence 그 자체가 아닌 그 주변부를 보고 가장 적절한 label chain을 결정한다는 점이다.
+                                상황에 따라 그 단어의 품사나 의미가 달라지는 언어의 특성상 자연어 처리 알고리즘에 유용하게 사용된다.<br>
+                                1.	Train할 진행할 dataset을 불러온다. 본 프로그램에서는 semeval2017이라는 data를 사용하였다.<br>
+                                2.	불러온 data를 바탕으로 training을 진행해준다. Training의 대략적인 절차는 다음과 같다.
+                                (PyCRFSuite 라이브러리를 활용한다.)<br>
+                                a.	model에 data를 append하여 학습할 준비를 해준다.<br>
+                                b.	PyCRFSuite에서 사용할 parameter를 설정해준다.<br>
+                                c.	설정한 parameter를 바탕으로 model을 학습시켜주면서 그 결과를 tagger에 넣어준다.<br>
+                                3.	Keyword를 추출한 논문을 text로 받은 뒤, keyword 추출을 진행한다. 그 과정의 대략적인 절차는 아래와 같다.<br>
+                                a.	입력 받은 text를 tokenize하고, tagging 해준다.<br>
+                                b.	Token, tag, pos_sequence 등을 토대로 text 중에 keyword가 될만한 후보를 찾아준다.<br>
+                                c.	Keyword의 후보들의 tag와 pos_sequence를 확인해보며 기대 토큰과 값이 일치할 경우 keyword로 처리하고 리스트에 추가한다.<br><br>                           
+                                 </div>
+                                  <h4 style="color:gray; text-align:center; font-weight:bold">CRF 키워드 특징</h4>
+                                  <div style="text-align:center">
+                                    Train data로 활용한 semeval2017은 과학 논문에서의 keyword 추출을 위한 data이다. 
+                                    따라서 전문 용어들의 추출이 잘 이루어졌다는 것을 확인할 수 있다. 
+                                    하지만 사용한 알고리즘의 특성상 추출된 keyword 간의 중요도 비교가 어려워 keyword의 중요도를 메기기 어렵고, 따라서 keyword를 특정 개수로 설정할 수 없다.
+                                    또한, 과학 논문을 위한 train data이다보니 stack 등과 같은 일상적으로 사용되는 전문 용어는 잘 추출되지 않는다.
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <!-- 서영 설명 modal 수정 끝 -->
+                </div>
+                <div class="card-body">
+                  <div class="row icon-examples">
+    
+                    <!-- 여기부터 바꿈(하경민) -->
+                     <!-- 3. crf. 1st 키워드를 버튼에 띄우고 나머지는 modal 창에 띄우기.-->
+                    <%for (var i = 0; i < results.length; i++) { %>
+                      <div class="col-lg-3 col-md-6">
+                        <button type="button" class="btn-icon-clipboard" data-toggle="modal" data-target="#myModal_CRF<%=i%>" data-clipboard-text="active-40" title="Click to see the Title of the Paper">
+                          <div>
+                            <i class="ni ni-active-40"></i>
+                            <span><%= results[i]['1st_keyword'] %></span>
+                          </div>
+                        </button>
+                      </div>
+                      
+                       <!-- 버튼을 클릭하면 modal 창을 띄워서, 논문 제목과 그 논문을 구글 학술검색에 검색해주는 링크 띄우기 -->
+                      <div id="myModal_CRF<%=i%>" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                          <div class="modal-content" style="width: 850px">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <h4 style="color:gray">1st Keyword</h4><p>   <%= temp[i][0] %></p>
+                                <h4 style="color:gray">2nd Keyword</h4><p>   <%= temp[i][1] %></p>
+                              <% for(var k = 2; k < temp[i].length; k++) {%>
+                                <h4 style="color:gray"><%=k + 1%>th Keyword</h4><p>   <%= temp[i][k] %></p>
+                              <% } %>
+                              <h4 style="color:gray">Keyword from</h4>
+                              <p><a href= "https://scholar.google.co.kr/scholar?hl=ko&as_sdt=0%2C5&q=<%=results[i]['title']%>&btnG=" ><%= results[i]['title'] %></a></p>
+    
+                              <h4>abstract</h4>
+                              <%= results[i].abstract %>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <% } %>
+                     <!-- 여기까지 바꿈(하경민) -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Footer -->
+          <% include ../partials/footer %>
+        </div>
+
+
+
+
+  </div>
+  <!-- Include scripts -->
+  <% include ../partials/scripts %>
+</body>
