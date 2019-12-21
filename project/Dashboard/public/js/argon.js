@@ -19,6 +19,41 @@
 //
 // Bootstrap Datepicker
 //
+var mysql = require('mysql');
+var routes = require('./routes/index');
+var conn  = mysql.createConnection({
+  host            : '52.79.166.26',
+  port            : 3306,
+  user            : 'csed232',
+  password        : 'csed232',
+  database        : 'postech'
+});
+
+var express = require('express');
+var ejs = require('ejs');
+var bodyParser = require('body-parser');
+var app = express();
+app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({extended: false}));  // urlencoded    
+app.use(bodyParser.json());                         // json 타입으로 파싱하게 설정
+app.use(express.static(__dirname + '/'));
+console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+var testchart =  {
+	list : function(req, res)
+	{
+	   var sql = "SELECT year FROM postech.nonmoon limit 5";
+ 
+	   conn.query(sql, function(err, results, field) {
+		  
+		  res.render('./../views/partials/header', {data : 'fucck', year : results})
+	   });
+	}
+	
+ };
+
+///////////////////////////////////////
+
+
 
 
 
@@ -961,8 +996,60 @@ var Charts = (function() {
 // 	// Variables
 // 	//
 
+<<<<<<< HEAD:project/Dashboard/public/js/argon.js
 // 	var $chart = $('#chart-orders');
 // 	var $ordersSelect = $('[name="ordersSelect"]');
+=======
+	//
+	// Methods
+	//
+
+	// Init chart
+	function initChart($chart) {
+
+		// Create chart
+		var ordersChart = new Chart($chart, {
+			type: 'bar',
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							callback: function(value) {
+								if (!(value % 10)) {
+									//return '$' + value + 'k'
+									return value
+								}
+							}
+						}
+					}]
+				},
+				tooltips: {
+					callbacks: {
+						label: function(item, data) {
+							var label = data.datasets[item.datasetIndex].label || '';
+							var yLabel = item.yLabel;
+							var content = '';
+
+							if (data.datasets.length > 1) {
+								content += '<span class="popover-body-label mr-0">' + label + '</span>';
+							}
+
+							content += '<span class="popover-body-value">' + yLabel + '</span>';
+							
+							return content;
+						}
+					}
+				}
+			},
+			data: {
+				labels: ['model', 'algorithm', 'learning', 'method', 'problem', 'data'],
+				datasets: [{
+					label: 'Sales',
+					data: [25, 20, 30, 22]
+				}]
+			}
+		});
+>>>>>>> d60cc8d25210da14204320682acf8ee8549bab75:project/dashboard-nodejs/public/js/argon.js
 
 
 // 	//
