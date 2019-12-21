@@ -38,3 +38,77 @@ Weekly : Tuesday 12:15 ~ 13:15
 
 ## Objectives
 * Fun
+
+
+## File Structure
+
+```
+├── README.md **작업한 것**
+├── app.js **작업한 것**
+├── bin
+│   └── www **작업한 것**
+├── config
+│   └── config.json **작업한 것**
+├── env-files
+│   └── development.env **작업한 것**
+├── gulpfile.js
+├── haproxy.cfg
+├── logger.js
+├── package.json
+├── public
+│   ├── css
+│   │   ├── argon.css
+│   │   └── argon.min.css
+│   ├── fonts
+│   │   └── nucleo
+│   ├── img
+│   │   ├── brand
+│   │   ├── icons
+│   │   └── theme
+│   ├── js
+│   │   ├── argon.js
+│   │   └── argon.min.js
+│   ├── scss
+│   │   ├── argon.scss
+│   │   ├── bootstrap
+│   │   ├── core
+│   │   └── custom
+│   └── vendor
+├── models
+│   ├── index.js **작업한 것**
+│   └── user.js **작업한 것**
+├── passport
+│   ├── index.js **작업한 것**
+│   ├── kakaoStrategy.js **작업한 것**
+│   └── localStrategy.js **작업한 것**
+├── routes
+│   ├── auth.js **작업한 것**
+│   ├── file.js **작업한 것**
+│   ├── index.js **작업한 것**
+│   └── middlewares.js **작업한 것**
+├── uploads **작업한 것**
+├── views
+│   ├── layout.ejs
+│   ├── pages
+│   │   ├── 404.ejs
+│   │   ├── dashboard.ejs **작업한 것**
+│   │   ├── icons.ejs **작업한 것**
+│   │   ├── login.ejs **작업한 것**
+│   │   ├── maps.ejs **작업한 것**
+│   │   ├── profile.ejs
+│   │   ├── register.ejs
+│   │   ├── reset-password.ejs
+│   │   ├── tables.ejs
+│   │   └── uploads.ejs **작업한 것**
+│   └── partials
+│       ├── auth
+│       │   ├── footer.ejs
+│       │   ├── header.ejs
+│       │   └── navbar.ejs
+│       ├── dropdown.ejs **작업한 것**
+│       ├── footer.ejs **작업한 것**
+│       ├── header.ejs **작업한 것**
+│       ├── navbar.ejs **작업한 것**
+│       └── sidebar.ejs **작업한 것**
+└
+```
